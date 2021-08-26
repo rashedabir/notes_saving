@@ -48,7 +48,18 @@ export default async (req, res) => {
       } catch (error) {
         res.status(400).json({ success: false });
       }
-
+    case "DELETE":
+      try {
+        const deleteNote = await Note.deleteOne({ _id: id });
+        if (!deleteNote) {
+          return res
+            .status(400)
+            .json({ success: false, msg: "Note cant Delete" });
+        }
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      res.json({ msg: "Note Deleted" });
     default:
       res.status(500).json({ success: false });
       break;
