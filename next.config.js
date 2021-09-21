@@ -1,4 +1,7 @@
 module.exports = {
   reactStrictMode: true,
-  env: process.env.MONGO_URI,
+  env: {
+    MONGO_URI:
+      "mongodb+srv://rashed:rashed2155@cluster0.uqdc9.mongodb.net/notes?retryWrites=true&w=majority",
+  },
 };
