@@ -18,7 +18,7 @@ export default async (req, res) => {
             .status(400)
             .json({ success: false, msg: "Note not Found" });
         }
-        res.json({ note });
+        res.json({ success: true, note: note });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -42,24 +42,30 @@ export default async (req, res) => {
           {
             title,
             description,
+          },
+          {
+            new: true,
+            runValidators: true,
           }
         );
-        res.json({ msg: "Note Updated" });
+        res.json({ success: true, msg: "Note Updated" });
       } catch (error) {
         res.status(400).json({ success: false });
       }
+      break;
     case "DELETE":
       try {
-        const deleteNote = await Note.deleteOne({ _id: id });
-        if (!deleteNote) {
+        const note = await Note.findByIdAndDelete(req.params.id);
+        if (!note) {
           return res
             .status(400)
-            .json({ success: false, msg: "Note cant Delete" });
+            .json({ success: false, msg: "Note can't Delete" });
         }
+        res.json({ msg: "Note Deleted" });
       } catch (error) {
         res.status(400).json({ success: false });
       }
-      res.json({ msg: "Note Deleted" });
+      break;
     default:
       res.status(500).json({ success: false });
       break;
