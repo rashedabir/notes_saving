@@ -19,7 +19,10 @@
     "**/*.ts",
     "**/*.tsx",
     "utils/dbConnect.js",
-    "pages/api/notes/index.ts"
+    "pages/api/notes/index.ts",
+    "components/Navbar.js",
+    "components/Layout.js",
+    "pages/index.js"
   ],
   "exclude": ["node_modules"]
 }

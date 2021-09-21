@@ -18,3 +18,24 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.card {
+  width: 290px;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+textarea:focus {
+  outline: none !important;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+
+@media only screen and (max-width: 624px) {
+  .card {
+    width: 100%;
+  }
+}
