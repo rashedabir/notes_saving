@@ -18,7 +18,7 @@ export default async (req, res) => {
             .status(400)
             .json({ success: false, msg: "Note not Found" });
         }
-        res.json({ success: true, note: note });
+        res.json({ success: true, data: note });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -55,13 +55,13 @@ export default async (req, res) => {
       break;
     case "DELETE":
       try {
-        const note = await Note.findByIdAndDelete(req.params.id);
+        const note = await Note.deleteOne({ _id: id });
         if (!note) {
           return res
             .status(400)
             .json({ success: false, msg: "Note can't Delete" });
         }
-        res.json({ msg: "Note Deleted" });
+        res.json({ success: true, msg: "Note Deleted" });
       } catch (error) {
         res.status(400).json({ success: false });
       }
