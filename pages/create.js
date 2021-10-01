@@ -22,14 +22,13 @@ function create() {
   }, [errors]);
 
   const createNote = async () => {
-    let dev = process.env.NODE_ENV !== "production";
-    let { DEV_URL, PROD_URL } = process.env;
+    let PROD_URL = "https://notes-saving.vercel.app";
     const data = {
       title: title,
       description: description,
     };
     try {
-      await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes`, {
+      await fetch(`${PROD_URL}/api/notes`, {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -40,9 +40,8 @@ function Note({ note }) {
 }
 
 Note.getInitialProps = async ({ query: { id } }) => {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes/${id}`);
+  let PROD_URL = "https://notes-saving.vercel.app";
+  const res = await fetch(`${PROD_URL}/api/notes/${id}`);
   const { data } = await res.json();
 
   return { note: data };

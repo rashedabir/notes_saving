@@ -16,9 +16,8 @@ const Index = ({ notes }) => {
 };
 
 Index.getInitialProps = async () => {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes`);
+  let PROD_URL = "https://notes-saving.vercel.app";
+  const res = await fetch(`${PROD_URL}/api/notes`);
   const { data } = await res.json();
 
   return { notes: data };
