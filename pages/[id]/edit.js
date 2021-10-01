@@ -21,13 +21,15 @@ function EditNote({ note }) {
   }, [errors]);
 
   const updateNote = async () => {
+    let dev = process.env.NODE_ENV !== "production";
+    let { DEV_URL, PROD_URL } = process.env;
     const data = {
       title: title,
       description: description,
     };
     try {
       const res = await fetch(
-        `http://localhost:3000/api/notes/${router.query.id}`,
+        `${dev ? DEV_URL : PROD_URL}/api/notes/${router.query.id}`,
         {
           method: "PUT",
           headers: {
@@ -134,7 +136,9 @@ function EditNote({ note }) {
 }
 
 EditNote.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`http://localhost:3000/api/notes/${id}`);
+  let dev = process.env.NODE_ENV !== "production";
+  let { DEV_URL, PROD_URL } = process.env;
+  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes/${id}`);
   const { data } = await res.json();
 
   return { note: data };

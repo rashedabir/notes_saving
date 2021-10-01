@@ -22,12 +22,14 @@ function create() {
   }, [errors]);
 
   const createNote = async () => {
+    let dev = process.env.NODE_ENV !== "production";
+    let { DEV_URL, PROD_URL } = process.env;
     const data = {
       title: title,
       description: description,
     };
     try {
-      await fetch("http://localhost:3000/api/notes", {
+      await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes`, {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -16,7 +16,9 @@ const Index = ({ notes }) => {
 };
 
 Index.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/notes");
+  let dev = process.env.NODE_ENV !== "production";
+  let { DEV_URL, PROD_URL } = process.env;
+  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes`);
   const { data } = await res.json();
 
   return { notes: data };

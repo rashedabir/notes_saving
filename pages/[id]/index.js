@@ -6,10 +6,12 @@ function Note({ note }) {
   const router = useRouter();
 
   const deleteNote = async () => {
+    let dev = process.env.NODE_ENV !== "production";
+    let { DEV_URL, PROD_URL } = process.env;
     const noteId = router.query.id;
     try {
       if (window.confirm(`want to delete ${note.title}?`)) {
-        await fetch(`http://localhost:3000/api/notes/${noteId}`, {
+        await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes/${noteId}`, {
           method: "Delete",
         });
         toast.success("Note Deleted");
@@ -38,7 +40,9 @@ function Note({ note }) {
 }
 
 Note.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`http://localhost:3000/api/notes/${id}`);
+  let dev = process.env.NODE_ENV !== "production";
+  let { DEV_URL, PROD_URL } = process.env;
+  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/notes/${id}`);
   const { data } = await res.json();
 
   return { note: data };
